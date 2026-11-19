@@ -4,38 +4,45 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static final int SIZE = 3;
+    public static final int SIZE = 4;
 
     public static void main(String[] args) {
 
         int[][] colors = new int[SIZE][SIZE];
         int[][] rotateColor = new int[SIZE][SIZE];
 
-        Random random = new Random();
-
         Scanner scan = new Scanner(System.in);
 
+        fillingArray(colors);
+
+        printArray(colors);        
+
+        int options = Integer.parseInt(doDialogUser(scan));
+
+        rotateColor = rotationArray(colors, options);
+        
+        printArray(rotateColor);
+
+    }
+
+    public static void fillingArray(int[][] array){
+        Random random = new Random();
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                colors[i][j] = random.nextInt(256);
+                array[i][j] = random.nextInt(256);
             }
         }
+    }
 
-        printArray(colors);
-
-        System.out.println(
+    public static String doDialogUser(Scanner scan){
+         System.out.println(
                 "Выберите опцию:\n" +
                         "1. Повернуть матрицу на 90 градусов\n" +
                         "2. Повернуть матрицу на 180 градусов\n" +
                         "3. Повернуть матрицу на 270 градусов\n");
 
         String input = scan.nextLine();
-
-        rotateColor = rotationArray(colors, Integer.parseInt(input));
-
-        System.out.println();
-        printArray(rotateColor);
-
+        return input;
     }
 
     public static int[][] rotationArray(int[][] original, int options) {
@@ -75,5 +82,6 @@ public class Main {
             }
             System.out.println();
         }
+        System.out.println();
     }
 }
